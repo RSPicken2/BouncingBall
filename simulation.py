@@ -15,9 +15,9 @@ g = -10
 start_x = 0
 start_y = 0
 
-radius = 20
+radius = 50
 
-energy_conserved = 0.5
+energy_conserved = 0.95
 
 def sim_loop(ball, ball_turtle):
     while True:
@@ -41,7 +41,7 @@ def run():
     window.bgcolor("lightgray")
     window.tracer(0)
 
-    multiplier = radius/20 # size is 20px by default and shapesize stretches instead of setting size directly
+    multiplier = radius/10 # size is 20px by default and we want twice the radius for width
     ball_turtle.shapesize(multiplier, multiplier, outline=None)
 
     ball_turtle.penup()
