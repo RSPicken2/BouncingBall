@@ -1,3 +1,4 @@
+import math
 from collections import namedtuple
 
 
@@ -15,7 +16,7 @@ class Ball:
         self.energy_conserved = energy_conserved
 
     # detects if the ball has collided with the walls and bounces it the other direction
-    def handle_collisions(self):
+    def handle_wall_collisions(self):
         # detect a collision with left and right walls
         if self.x + self.radius > self.bounds.right:
             print(str(self.get_x()) + " " + str(self.get_y()))
@@ -40,8 +41,16 @@ class Ball:
         self.x += self.x_vel * timestep
         self.y += self.y_vel * timestep
 
-        self.handle_collisions()
+        self.handle_wall_collisions()
 
+    def get_sqr_distance(self, ball):
+        return math.pow(self.x - ball.x, 2) + math.pow(self.y - ball.y, 2)
+
+    def get_ball_vector(self, ball):
+        return [self.x - ball.x, self.y - ball.y]
+
+    def is_colliding(self, ball):
+        return self.get_sqr_distance(ball) <= math.pow(self.radius + ball.radius, 2)
     def get_x(self):
         return self.x
 
